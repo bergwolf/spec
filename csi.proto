@@ -47,6 +47,9 @@ service Node {
   rpc NodeUnpublishVolume (NodeUnpublishVolumeRequest)
     returns (NodeUnpublishVolumeResponse) {}
 
+  rpc NodeQueryPublishedVolume (NodeQueryPublishedVolumeRequest)
+    returns (NodeQueryPublishedVolumeResponse) {}
+
   rpc GetNodeID (GetNodeIDRequest)
     returns (GetNodeIDResponse) {}
 
@@ -589,6 +592,22 @@ message NodeUnpublishVolumeRequest {
 }
 
 message NodeUnpublishVolumeResponse {}
+////////
+////////
+message NodeQueryPublishedVolumeRequest {
+  // This is a REQUIRED field
+  string volume_id = 1;
+}
+
+message NodeQueryPublishedVolumeResponse {
+  // This field is REQUIRED. It MUST match the value set in
+  // `NodePublishVolumeRequest`.
+  bool readonly = 1;
+  // Attributes of the volume to be used by node. This field is OPTIONAL
+  // and MUST match the attributes of the VolumeInfo identified by
+  // `volume_id`.
+  map<string, string> volume_attributes = 2;
+}
 ////////
 ////////
 message GetNodeIDRequest {
