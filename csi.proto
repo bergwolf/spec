@@ -526,6 +526,11 @@ message NodePublishVolumeRequest {
   // REQUIRED.
   bool readonly = 6;
 
+  // Whether try to publish the volume in detached mode that it is not
+  // present in any host path. When set true, `target_path` is ignored.
+  // This field is REQUIRED.
+  bool detached_mode = 7;
+
   // End user credentials used to authenticate/authorize node
   // publish request.
   // This field contains credential data, for example username and
@@ -537,15 +542,19 @@ message NodePublishVolumeRequest {
   // users to pass through the required credentials. This information is
   // sensitive and MUST be treated as such (not logged, etc.) by the CO.
   // This field is OPTIONAL.
-  map<string, string> user_credentials = 7;
+  map<string, string> user_credentials = 8;
 
   // Attributes of the volume to publish. This field is OPTIONAL and
   // MUST match the attributes of the VolumeInfo identified by
   // `volume_id`.
-  map<string,string> volume_attributes = 8;
+  map<string,string> volume_attributes = 9;
 }
 
-message NodePublishVolumeResponse {}
+message NodePublishVolumeResponse {
+  // Whether the volume is published in detached mode that it is not
+  // present in any host path. This field is REQUIRED.
+  bool detached_mode = 1;
+}
 ////////
 ////////
 message NodeUnpublishVolumeRequest {
@@ -559,6 +568,11 @@ message NodeUnpublishVolumeRequest {
   // path in the root filesystem of the process serving this request.
   // This is a REQUIRED field.
   string target_path = 3;
+
+  // The volume is published in detached mode. It MUST match `detached_mode`
+  // returned in `NodePublishVolumeResponse`. When set true, `target_path` is
+  // ignored. This field is REQUIRED.
+  bool detached_mode = 1;
 
   // End user credentials used to authenticate/authorize node
   // unpublish request.
