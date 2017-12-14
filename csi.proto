@@ -209,6 +209,11 @@ message VolumeCapability {
 
     // This field is REQUIRED.
     Mode mode = 1;
+
+    // Indicate that a node plugin SHOULD NOT present the volume on the node
+    // host. When set true, `target_path` is ignored in `NodePublishVolumeRequest`
+    // and `NodeUnpublishVolumeRequest`. This field is REQUIRED.
+    bool ignore_hostpath = 2;
   }
 
   // Specifies what API the volume will be accessed using. One of the
