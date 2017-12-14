@@ -515,7 +515,7 @@ message NodePublishVolumeRequest {
   // request. The CO SHALL ensure uniqueness of target_path per volume.
   // The CO SHALL ensure that the path exists, and that the process
   // serving the request has `read` and `write` permissions to the path.
-  // This is a REQUIRED field.
+  // This is an OPTIONAL field.
   string target_path = 4;
 
   // The capability of the volume the CO expects the volume to have.
@@ -557,7 +557,7 @@ message NodeUnpublishVolumeRequest {
 
   // The path at which the volume was published. It MUST be an absolute
   // path in the root filesystem of the process serving this request.
-  // This is a REQUIRED field.
+  // This is a OPTIONAL field.
   string target_path = 3;
 
   // End user credentials used to authenticate/authorize node
